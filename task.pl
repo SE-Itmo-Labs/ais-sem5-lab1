@@ -7,7 +7,6 @@ unit_type(warrior).
 unit_type(archer).
 unit_type(horseman).
 unit_type(catapult).
-unit_type(karavella).
 unit_type(swordsman).
 unit_type(crossbowman).
 unit_type(knight).
@@ -164,3 +163,8 @@ tech_unlocks_unit(Tech, Unit) :-
 building_available(District, Building) :-
     building_district(Building, District).
 
+is_not_classical(Unit) :-
+    unit_era(Unit, E),
+    \+ E = classical.
+
+% forall((unit_era(Unit, E), \+ E = classical), writeln(Unit)).

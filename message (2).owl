@@ -1,0 +1,676 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:civ="http://example.org/civilization#"
+         xml:base="http://example.org/civilization">
+
+  <owl:Ontology rdf:about="http://example.org/civilization">
+    <rdfs:label>Civilization Game Ontology</rdfs:label>
+  </owl:Ontology>
+
+  <!-- ==================== КЛАССЫ ==================== -->
+
+  <owl:Class rdf:about="#UnitType">
+    <rdfs:label>Unit Type</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="#MilitaryUnit">
+    <rdfs:subClassOf rdf:resource="#UnitType"/>
+    <rdfs:label>Military Unit</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="#NonMilitaryUnit">
+    <rdfs:subClassOf rdf:resource="#UnitType"/>
+    <rdfs:label>Non-Military Unit</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="#Civilization">
+    <rdfs:label>Civilization</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="#Era">
+    <rdfs:label>Era</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="#Building">
+    <rdfs:label>Building</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="#District">
+    <rdfs:label>District</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="#Technology">
+    <rdfs:label>Technology</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="#Resource">
+    <rdfs:label>Resource</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="#VictoryType">
+    <rdfs:label>Victory Type</rdfs:label>
+  </owl:Class>
+
+  <owl:Class rdf:about="#UniqueAbility">
+    <rdfs:label>Unique Ability</rdfs:label>
+  </owl:Class>
+
+  <!-- ==================== OBJECT PROPERTIES ==================== -->
+
+  <owl:ObjectProperty rdf:about="#requiresResource">
+    <rdfs:domain rdf:resource="#UnitType"/>
+    <rdfs:range rdf:resource="#Resource"/>
+    <rdfs:label>requires resource</rdfs:label>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#availableInEra">
+    <rdfs:domain rdf:resource="#UnitType"/>
+    <rdfs:range rdf:resource="#Era"/>
+    <rdfs:label>available in era</rdfs:label>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#unlocksUnit">
+    <rdfs:domain rdf:resource="#Technology"/>
+    <rdfs:range rdf:resource="#UnitType"/>
+    <rdfs:label>unlocks unit</rdfs:label>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#civUniqueUnit">
+    <rdfs:domain rdf:resource="#Civilization"/>
+    <rdfs:range rdf:resource="#UnitType"/>
+    <rdfs:label>civilization unique unit</rdfs:label>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#civUniqueAbility">
+    <rdfs:domain rdf:resource="#Civilization"/>
+    <rdfs:range rdf:resource="#UniqueAbility"/>
+    <rdfs:label>civilization unique ability</rdfs:label>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#buildingInDistrict">
+    <rdfs:domain rdf:resource="#Building"/>
+    <rdfs:range rdf:resource="#District"/>
+    <rdfs:label>building in district</rdfs:label>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#eraBefore">
+    <rdfs:domain rdf:resource="#Era"/>
+    <rdfs:range rdf:resource="#Era"/>
+    <rdfs:label>era before</rdfs:label>
+  </owl:ObjectProperty>
+
+  <owl:ObjectProperty rdf:about="#hasVictoryCondition">
+    <rdfs:domain rdf:resource="#Civilization"/>
+    <rdfs:range rdf:resource="#VictoryType"/>
+    <rdfs:label>has victory condition</rdfs:label>
+  </owl:ObjectProperty>
+
+  <!-- ==================== DATA PROPERTIES ==================== -->
+
+  <owl:DatatypeProperty rdf:about="#name">
+    <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    <rdfs:label>name</rdfs:label>
+  </owl:DatatypeProperty>
+
+  <!-- ==================== ЭПОХИ ==================== -->
+
+  <owl:NamedIndividual rdf:about="#ancient">
+    <rdf:type rdf:resource="#Era"/>
+    <civ:name>Ancient</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#classical">
+    <rdf:type rdf:resource="#Era"/>
+    <civ:name>Classical</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#medieval">
+    <rdf:type rdf:resource="#Era"/>
+    <civ:name>Medieval</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#renaissance">
+    <rdf:type rdf:resource="#Era"/>
+    <civ:name>Renaissance</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#industrial">
+    <rdf:type rdf:resource="#Era"/>
+    <civ:name>Industrial</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#modern">
+    <rdf:type rdf:resource="#Era"/>
+    <civ:name>Modern</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#information">
+    <rdf:type rdf:resource="#Era"/>
+    <civ:name>Information</civ:name>
+  </owl:NamedIndividual>
+
+  <!-- ==================== ПОРЯДОК ЭПОХ ==================== -->
+
+  <rdf:Description rdf:about="#ancient">
+    <civ:eraBefore rdf:resource="#classical"/>
+    <civ:eraBefore rdf:resource="#medieval"/>
+    <civ:eraBefore rdf:resource="#renaissance"/>
+    <civ:eraBefore rdf:resource="#industrial"/>
+    <civ:eraBefore rdf:resource="#modern"/>
+    <civ:eraBefore rdf:resource="#information"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#classical">
+    <civ:eraBefore rdf:resource="#medieval"/>
+    <civ:eraBefore rdf:resource="#renaissance"/>
+    <civ:eraBefore rdf:resource="#industrial"/>
+    <civ:eraBefore rdf:resource="#modern"/>
+    <civ:eraBefore rdf:resource="#information"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#medieval">
+    <civ:eraBefore rdf:resource="#renaissance"/>
+    <civ:eraBefore rdf:resource="#industrial"/>
+    <civ:eraBefore rdf:resource="#modern"/>
+    <civ:eraBefore rdf:resource="#information"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#renaissance">
+    <civ:eraBefore rdf:resource="#industrial"/>
+    <civ:eraBefore rdf:resource="#modern"/>
+    <civ:eraBefore rdf:resource="#information"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#industrial">
+    <civ:eraBefore rdf:resource="#modern"/>
+    <civ:eraBefore rdf:resource="#information"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#modern">
+    <civ:eraBefore rdf:resource="#information"/>
+  </rdf:Description>
+
+  <!-- ==================== РЕСУРСЫ ==================== -->
+
+  <owl:NamedIndividual rdf:about="#iron">
+    <rdf:type rdf:resource="#Resource"/>
+    <civ:name>Iron</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#horses">
+    <rdf:type rdf:resource="#Resource"/>
+    <civ:name>Horses</civ:name>
+  </owl:NamedIndividual>
+
+  <!-- ==================== ВОЕННЫЕ ЮНИТЫ ==================== -->
+
+  <owl:NamedIndividual rdf:about="#warrior">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Warrior</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#archer">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Archer</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#horseman">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Horseman</civ:name>
+    <civ:requiresResource rdf:resource="#horses"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#catapult">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Catapult</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#karavella">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Karavella</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#swordsman">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Swordsman</civ:name>
+    <civ:requiresResource rdf:resource="#iron"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#crossbowman">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Crossbowman</civ:name>
+    <civ:requiresResource rdf:resource="#iron"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#knight">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Knight</civ:name>
+    <civ:requiresResource rdf:resource="#horses"/>
+    <civ:requiresResource rdf:resource="#iron"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#trebuchet">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Trebuchet</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#caravel">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Caravel</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#trireme">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Trireme</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#scout">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Scout</civ:name>
+  </owl:NamedIndividual>
+
+  <!-- ==================== НЕВОЕННЫЕ ЮНИТЫ ==================== -->
+
+  <owl:NamedIndividual rdf:about="#settler">
+    <rdf:type rdf:resource="#NonMilitaryUnit"/>
+    <civ:name>Settler</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#builder">
+    <rdf:type rdf:resource="#NonMilitaryUnit"/>
+    <civ:name>Builder</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#rock_band">
+    <rdf:type rdf:resource="#NonMilitaryUnit"/>
+    <civ:name>Rock Band</civ:name>
+  </owl:NamedIndividual>
+
+  <!-- ==================== УНИКАЛЬНЫЕ ЮНИТЫ ЦИВИЛИЗАЦИЙ ==================== -->
+
+  <owl:NamedIndividual rdf:about="#legion">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Legion</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#maryannu_chariot_archer">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Maryannu Chariot Archer</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#hoplite">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Hoplite</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#immortal">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Immortal</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#highlander">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Highlander</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#samurai">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Samurai</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#cossack">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Cossack</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#chu_ko_nu">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Chu Ko Nu</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#keshig">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Keshig</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#impi">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Impi</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#hwacha">
+    <rdf:type rdf:resource="#MilitaryUnit"/>
+    <civ:name>Hwacha</civ:name>
+  </owl:NamedIndividual>
+
+  <!-- ==================== ТИПЫ ПОБЕД ==================== -->
+
+  <owl:NamedIndividual rdf:about="#score_victory">
+    <rdf:type rdf:resource="#VictoryType"/>
+    <civ:name>Score Victory</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#diplomacy_victory">
+    <rdf:type rdf:resource="#VictoryType"/>
+    <civ:name>Diplomacy Victory</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#war_victory">
+    <rdf:type rdf:resource="#VictoryType"/>
+    <civ:name>War Victory</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#science_victory">
+    <rdf:type rdf:resource="#VictoryType"/>
+    <civ:name>Science Victory</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#culture_victory">
+    <rdf:type rdf:resource="#VictoryType"/>
+    <civ:name>Culture Victory</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#religion_victory">
+    <rdf:type rdf:resource="#VictoryType"/>
+    <civ:name>Religion Victory</civ:name>
+  </owl:NamedIndividual>
+
+  <!-- ==================== УНИКАЛЬНЫЕ СПОСОБНОСТИ ==================== -->
+
+  <owl:NamedIndividual rdf:about="#mother_russia">
+    <rdf:type rdf:resource="#UniqueAbility"/>
+    <civ:name>Mother Russia</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#time_of_the_pyramids">
+    <rdf:type rdf:resource="#UniqueAbility"/>
+    <civ:name>Time of the Pyramids</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#dynastic_tradition">
+    <rdf:type rdf:resource="#UniqueAbility"/>
+    <civ:name>Dynastic Tradition</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#platos_republic">
+    <rdf:type rdf:resource="#UniqueAbility"/>
+    <civ:name>Plato's Republic</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#satrapies">
+    <rdf:type rdf:resource="#UniqueAbility"/>
+    <civ:name>Satrapies</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#mongol_empire">
+    <rdf:type rdf:resource="#UniqueAbility"/>
+    <civ:name>Mongol Empire</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#all_roads_lead_to_rome">
+    <rdf:type rdf:resource="#UniqueAbility"/>
+    <civ:name>All Roads Lead to Rome</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#scottish_enlightenment">
+    <rdf:type rdf:resource="#UniqueAbility"/>
+    <civ:name>Scottish Enlightenment</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#meiji_restoration">
+    <rdf:type rdf:resource="#UniqueAbility"/>
+    <civ:name>Meiji Restoration</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#amabutho">
+    <rdf:type rdf:resource="#UniqueAbility"/>
+    <civ:name>Amabutho</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#hwarang">
+    <rdf:type rdf:resource="#UniqueAbility"/>
+    <civ:name>Hwarang</civ:name>
+  </owl:NamedIndividual>
+
+  <!-- ==================== ЦИВИЛИЗАЦИИ ==================== -->
+
+  <owl:NamedIndividual rdf:about="#russia">
+    <rdf:type rdf:resource="#Civilization"/>
+    <civ:name>Russia</civ:name>
+    <civ:civUniqueUnit rdf:resource="#cossack"/>
+    <civ:civUniqueAbility rdf:resource="#mother_russia"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#egypt">
+    <rdf:type rdf:resource="#Civilization"/>
+    <civ:name>Egypt</civ:name>
+    <civ:civUniqueUnit rdf:resource="#maryannu_chariot_archer"/>
+    <civ:civUniqueAbility rdf:resource="#time_of_the_pyramids"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#china">
+    <rdf:type rdf:resource="#Civilization"/>
+    <civ:name>China</civ:name>
+    <civ:civUniqueUnit rdf:resource="#chu_ko_nu"/>
+    <civ:civUniqueAbility rdf:resource="#dynastic_tradition"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#greece">
+    <rdf:type rdf:resource="#Civilization"/>
+    <civ:name>Greece</civ:name>
+    <civ:civUniqueUnit rdf:resource="#hoplite"/>
+    <civ:civUniqueAbility rdf:resource="#platos_republic"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#persia">
+    <rdf:type rdf:resource="#Civilization"/>
+    <civ:name>Persia</civ:name>
+    <civ:civUniqueUnit rdf:resource="#immortal"/>
+    <civ:civUniqueAbility rdf:resource="#satrapies"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#mongolia">
+    <rdf:type rdf:resource="#Civilization"/>
+    <civ:name>Mongolia</civ:name>
+    <civ:civUniqueUnit rdf:resource="#keshig"/>
+    <civ:civUniqueAbility rdf:resource="#mongol_empire"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#rome">
+    <rdf:type rdf:resource="#Civilization"/>
+    <civ:name>Rome</civ:name>
+    <civ:civUniqueUnit rdf:resource="#legion"/>
+    <civ:civUniqueAbility rdf:resource="#all_roads_lead_to_rome"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#scotland">
+    <rdf:type rdf:resource="#Civilization"/>
+    <civ:name>Scotland</civ:name>
+    <civ:civUniqueUnit rdf:resource="#highlander"/>
+    <civ:civUniqueAbility rdf:resource="#scottish_enlightenment"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#japan">
+    <rdf:type rdf:resource="#Civilization"/>
+    <civ:name>Japan</civ:name>
+    <civ:civUniqueUnit rdf:resource="#samurai"/>
+    <civ:civUniqueAbility rdf:resource="#meiji_restoration"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#zulu">
+    <rdf:type rdf:resource="#Civilization"/>
+    <civ:name>Zulu</civ:name>
+    <civ:civUniqueUnit rdf:resource="#impi"/>
+    <civ:civUniqueAbility rdf:resource="#amabutho"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#korea">
+    <rdf:type rdf:resource="#Civilization"/>
+    <civ:name>Korea</civ:name>
+    <civ:civUniqueUnit rdf:resource="#hwacha"/>
+    <civ:civUniqueAbility rdf:resource="#hwarang"/>
+  </owl:NamedIndividual>
+
+  <!-- ==================== ТЕХНОЛОГИИ ==================== -->
+
+  <owl:NamedIndividual rdf:about="#bronze_working">
+    <rdf:type rdf:resource="#Technology"/>
+    <civ:name>Bronze Working</civ:name>
+    <civ:unlocksUnit rdf:resource="#warrior"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#archery">
+    <rdf:type rdf:resource="#Technology"/>
+    <civ:name>Archery</civ:name>
+    <civ:unlocksUnit rdf:resource="#archer"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#horseback_riding">
+    <rdf:type rdf:resource="#Technology"/>
+    <civ:name>Horseback Riding</civ:name>
+    <civ:unlocksUnit rdf:resource="#horseman"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#iron_working">
+    <rdf:type rdf:resource="#Technology"/>
+    <civ:name>Iron Working</civ:name>
+    <civ:unlocksUnit rdf:resource="#swordsman"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#mathematics">
+    <rdf:type rdf:resource="#Technology"/>
+    <civ:name>Mathematics</civ:name>
+    <civ:unlocksUnit rdf:resource="#catapult"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#military_tactics">
+    <rdf:type rdf:resource="#Technology"/>
+    <civ:name>Military Tactics</civ:name>
+    <civ:unlocksUnit rdf:resource="#crossbowman"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#chivalry">
+    <rdf:type rdf:resource="#Technology"/>
+    <civ:name>Chivalry</civ:name>
+    <civ:unlocksUnit rdf:resource="#knight"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#machinery">
+    <rdf:type rdf:resource="#Technology"/>
+    <civ:name>Machinery</civ:name>
+    <civ:unlocksUnit rdf:resource="#trebuchet"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#naval_tradition">
+    <rdf:type rdf:resource="#Technology"/>
+    <civ:name>Naval Tradition</civ:name>
+    <civ:unlocksUnit rdf:resource="#trireme"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#cartography">
+    <rdf:type rdf:resource="#Technology"/>
+    <civ:name>Cartography</civ:name>
+    <civ:unlocksUnit rdf:resource="#caravel"/>
+  </owl:NamedIndividual>
+
+  <!-- ==================== РАЙОНЫ ==================== -->
+
+  <owl:NamedIndividual rdf:about="#encampment">
+    <rdf:type rdf:resource="#District"/>
+    <civ:name>Encampment</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#harbor">
+    <rdf:type rdf:resource="#District"/>
+    <civ:name>Harbor</civ:name>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#entertainment_complex">
+    <rdf:type rdf:resource="#District"/>
+    <civ:name>Entertainment Complex</civ:name>
+  </owl:NamedIndividual>
+
+  <!-- ==================== ЗДАНИЯ ==================== -->
+
+  <owl:NamedIndividual rdf:about="#barracks">
+    <rdf:type rdf:resource="#Building"/>
+    <civ:name>Barracks</civ:name>
+    <civ:buildingInDistrict rdf:resource="#encampment"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#archery_range">
+    <rdf:type rdf:resource="#Building"/>
+    <civ:name>Archery Range</civ:name>
+    <civ:buildingInDistrict rdf:resource="#encampment"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#stable">
+    <rdf:type rdf:resource="#Building"/>
+    <civ:name>Stable</civ:name>
+    <civ:buildingInDistrict rdf:resource="#encampment"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#lighthouse">
+    <rdf:type rdf:resource="#Building"/>
+    <civ:name>Lighthouse</civ:name>
+    <civ:buildingInDistrict rdf:resource="#harbor"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#shipyard">
+    <rdf:type rdf:resource="#Building"/>
+    <civ:name>Shipyard</civ:name>
+    <civ:buildingInDistrict rdf:resource="#harbor"/>
+  </owl:NamedIndividual>
+
+  <owl:NamedIndividual rdf:about="#arena">
+    <rdf:type rdf:resource="#Building"/>
+    <civ:name>Arena</civ:name>
+    <civ:buildingInDistrict rdf:resource="#entertainment_complex"/>
+  </owl:NamedIndividual>
+
+  <!-- ==================== ЮНИТ → ЭПОХА ==================== -->
+
+  <rdf:Description rdf:about="#warrior">
+    <civ:availableInEra rdf:resource="#ancient"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#archer">
+    <civ:availableInEra rdf:resource="#ancient"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#scout">
+    <civ:availableInEra rdf:resource="#ancient"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#horseman">
+    <civ:availableInEra rdf:resource="#classical"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#swordsman">
+    <civ:availableInEra rdf:resource="#classical"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#catapult">
+    <civ:availableInEra rdf:resource="#classical"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#crossbowman">
+    <civ:availableInEra rdf:resource="#medieval"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#knight">
+    <civ:availableInEra rdf:resource="#medieval"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#trebuchet">
+    <civ:availableInEra rdf:resource="#medieval"/>
+  </rdf:Description>
+
+  <rdf:Description rdf:about="#caravel">
+    <civ:availableInEra rdf:resource="#renaissance"/>
+  </rdf:Description>
+
+</rdf:RDF>
